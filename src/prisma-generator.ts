@@ -149,8 +149,11 @@ export async function generate(options: GeneratorOptions) {
       ${model.toLowerCase()}: ${plural}Router`);
   }
 
+  const routerMap = `{${routerStatements}}`;
+
   appRouter.addStatements(/* ts */ `
-    export const appRouter = t.router({${routerStatements}})
+    export const routerMap = ${routerMap}
+    export const appRouter = t.router(routerMap)
     `);
 
   appRouter.formatText({ indentSize: 2 });
